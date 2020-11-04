@@ -1,0 +1,114 @@
+@import url(../_variaveis.css);
+@import url(_reset.css);
+
+body {
+    font-family: var(--font-padrao);
+    font-size: 16px;
+}
+
+/*Botão*/
+.botao {
+    background-color: var(--cor-primaria);
+    border: none;
+    border-radius: 16px;
+    color: var(--cor-branco);
+    text-align: center;
+    padding: 1em 0;
+    width: 100%;
+}
+
+.botao-secundario {
+    background-color: var(--cor-secundaria-transparente);
+}
+
+.botao-area-lado {
+    align-items: center;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.botao-lado {
+    width: calc(60% - 3em);
+}
+
+.link {
+    color: var(--cor-link);
+    text-decoration: underline;
+}
+
+/* Formulário */
+.label-titulo {
+    align-self: flex-start;
+    color: var(--cor-texto);
+    font-family: var(--font-titulo);
+    font-size: 1.25em;
+}
+
+.input {
+    box-sizing: border-box;
+    border-style: none;
+    border-bottom: 3px solid var(--cor-secundaria-transparente);
+    padding: 0.5em;
+    width: 100%;
+}
+
+.radio {
+    display: none;
+}
+
+.radio-titulo {
+    background-color: var(--cor-branco);
+    border: 2px solid var(--cor-secundaria-transparente);
+    border-radius: 16px;
+    color: var(--cor-texto);
+    font-family: var(--font-padrao);
+    font-size: 1em;
+    padding: 0.5em;
+}
+
+.active {
+    background-color: var(--cor-secundaria-transparente);
+    color: var(--cor-branco);
+}
+
+/* Outros elementos */
+.eventosonline {
+    color:  var(--cor-texto);
+    font-family: var(--font-eventosonline);
+    font-size: 3em;
+}
+
+.esconder {
+    display: none;
+}
+
+.popup {
+    align-items: center;
+    background-color: var(--cor-erro);
+    border-radius: 16px;
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: column;
+    min-width: 75%;
+    padding: 1em 1.25em;
+    z-index: 1;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.popup__letras{
+    color: var(--cor-branco);
+    font-family: var(--font-padrao);
+    font-size: 1.1em;
+}
+
+.close {
+    align-self: flex-end;
+    background-color: var(--cor-erro);
+    border: None;
+    margin-bottom: 0.3em;
+}

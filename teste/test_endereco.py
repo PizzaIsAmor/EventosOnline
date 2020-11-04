@@ -1,6 +1,6 @@
 import pytest
 
-from src.servidor.regras_de_negocio.dados import Endereco
+from src.servidor.regras_de_negocio.informacao import Endereco
 from src.servidor.regras_de_negocio.excessoes import EnderecoInvalidoError
 
 

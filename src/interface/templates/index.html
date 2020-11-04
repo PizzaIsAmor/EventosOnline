@@ -1,0 +1,8 @@
+{% extends 'template.html' %}
+{% block content %}
+<section class="apresentacao">
+    <h1 class="eventosonline apresentacao__nome-marca">EventosOnline</h1>
+    <a href="{{ url_for('login') }}" class="apresentacao__login"><button class="botao">Login</button></a>
+    <a href="{{ url_for('cadastro') }}"><p class="link apresentacao__cadastro">Ainda não tenho conta</p></a>
+</section>
+{% endblock %}

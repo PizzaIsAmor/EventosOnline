@@ -1,0 +1,18 @@
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<title>EventosOnline | {{ titulo }}</title>
+
+<link rel="shortcut icon" href="{{ url_for('static', filename='svg/logo.svg') }}">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/base/base.css') }}">
+
+{% if titulo == 'home' %}
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
+{% endif %}
+
+{% if nome_css %}
+    {% for nome in nome_css %}
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/'+ nome +'.css') }}">
+    {% endfor %}
+{% endif %}

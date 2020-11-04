@@ -1,0 +1,13 @@
+:root {
+    --cor-branco: #FFFFFF;
+    --cor-erro: #db182b;
+    --cor-link: #3D6DFF;
+    --cor-primaria: #6BDC61;
+    --cor-secundaria: #0E3CB2;
+    --cor-secundaria-transparente: rgba(14, 60, 178, 0.5);
+    --cor-texto: #474747;
+
+    --font-eventosonline: 'Confortaa', sans-serif;
+    --font-padrao: 'Open Sans', sans-serif;
+    --font-titulo: 'Merriweather', serif;
+}

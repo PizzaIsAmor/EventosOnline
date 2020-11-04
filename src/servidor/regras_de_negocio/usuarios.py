@@ -1,17 +1,18 @@
 import re
 
-from src.servidor.regras_de_negocio.dados import Data, Endereco, Email
+from src.servidor.regras_de_negocio.informacao import Data, Email
 from src.servidor.regras_de_negocio.excessoes import NomeInvalidoError
-
+from src.servidor.dados.dao import Dao
 
 class Usuario:
-    def __init__(self, nome: str, nascimento: str, email: str, cep: str, unidade: str):
-        self.__nome: str = ""
-        self.__inicializa_nome(nome)
-
-        self.__endereco: Endereco = Endereco(cep, unidade)
-        self.__nascimento: Data = Data(nascimento)
+    def __init__(self, email: str, senha: str, nome: str = None,
+                 cidade: str = None, id: int = -1):
         self.__email: Email = Email(email)
+        self.__senha: str = senha
+        self.__cidade: str = cidade
+        self.__nome: str = None
+        self.__id: int = id
+        self.__inicializa_nome(nome)
 
     @property
     def nome(self):
@@ -30,50 +31,75 @@ class Usuario:
         self.__email.email = novo_email
 
     @property
-    def endereco(self):
-        return str(self.__endereco)
+    def cidade(self):
+        return self.__cidade
 
-    def novo_endereco(self, cep, unidade):
-        self.__endereco.novo_endereco(cep, unidade)
-
-    @property
-    def nascimento(self):
-        return self.__nascimento.data
-
-    @nascimento.setter
-    def nascimento(self, nascimento):
-        self.__nascimento.data = nascimento
-
-    def __inicializa_nome(self, nome):
-        nome = nome.strip()
-
-        if self.__eh_nome_valido(nome):
-            self.__nome = nome
-        else:
-            raise NomeInvalidoError(classe="Nome de Usuário", nome=nome)
+    @cidade.setter
+    def cidade(self, cidade):
+        self.__cidade = cidade
 
     @staticmethod
     def __eh_nome_valido(nome):
         return type(nome) is str and re.fullmatch(r'[A-Za-z]+(\s[A-Za-z]+)*', nome)
 
+    def __inicializa_nome(self, nome):
+        if nome:
+            nome = nome.strip()
+            if self.__eh_nome_valido(nome):
+                self.__nome = nome
+            else:
+                raise NomeInvalidoError(classe="Nome de Usuário", nome=nome)
 
-class Adiministrador(Usuario):
-    def __init__(self, nome: str, nascimento: str, email: str, cep: str, unidade: str):
-        super().__init__(nome, nascimento, email, cep, unidade)
+    def login(self, tabela: str) -> tuple:
+        usuario = Dao(tabela).busca('email', self.__email.email)
 
+        if usuario and usuario[2] == self.__senha:
+            self.__cidade = usuario[4]
+            self.__inicializa_nome(usuario[3])
+            self.__id = usuario[0]
+
+            return usuario
+        return None
+
+    def salva(self, tabela: str, atributos_adicionais: dict) -> bool:
+        atributos_adicionais['nome'] = self.__nome
+        atributos_adicionais['email'] = self.__email.email
+        atributos_adicionais['senha'] = self.__senha
+        atributos_adicionais['cidade'] = self.__cidade
+        if self.__id != -1:
+            atributos_adicionais['id'] = self.__id
+
+        return Dao(tabela).salvar(atributos_adicionais)
 
 class Cliente(Usuario):
-    def __init__(self, nome: str, nascimento: str, email: str, cep: str, unidade: str):
-        super().__init__(nome, nascimento, email, cep, unidade)
+    def __init__(self, email: str, senha: str = None, nome: str = None,
+                 cidade: str = None, id: int = -1, privilegio: bool = False):
+        super().__init__(email, senha, nome, cidade, id)
+        self.__privilegio = privilegio
+
+    @property
+    def privilegio(self):
+        return self.__privilegio
+
+    def login(self) -> bool:
+        usuario = super().login('cliente')
+
+        if usuario:
+            self.__privilegio = usuario[5]
+
+            return True
+        return False
+
+    def salva(self):
+        return super().salva('cliente', {'privilegio': self.__privilegio})
 
 
 class Estabelecimento(Usuario):
-    def __init__(self, nome: str, nascimento: str, email: str, cep: str, unidade: str,
-                 cnpj, comprovantes_de_seguranca, fotos):
-        super().__init__(nome, nascimento, email, cep, unidade)
+    def __init__(self, email: str, senha: str = None, nome: str = None,
+                 cidade: str = None, id: int = -1, cnpj: str = None):
+        super().__init__(email, senha, nome, cidade, id)
         self.__cnpj = cnpj
-        self.__seguranca = comprovantes_de_seguranca
-        self.__fotos = fotos
+        self.senha = senha
 
     @property
     def cnpj(self):
@@ -83,18 +109,14 @@ class Estabelecimento(Usuario):
     def cnpj(self, cnpj):
         self.__cnpj = cnpj
 
-    @property
-    def comprovante_de_seguranca(self):
-        return self.__seguranca
+    def login(self) -> bool:
+        usuario = super().login('estabelecimento')
 
-    @comprovante_de_seguranca.setter
-    def comprovante_de_seguranca(self, comprovante_de_seguranca):
-        self.__seguranca = comprovante_de_seguranca
+        if usuario:
+            self.__cnpj = usuario[5]
 
-    @property
-    def fotos(self):
-        return self.__fotos
+            return True
+        return False
 
-    @fotos.setter
-    def fotos(self, fotos):
-        self.__fotos = fotos
+    def salva(self):
+        return super().salva('estabelecimento', {'cnpj': self.__cnpj})
