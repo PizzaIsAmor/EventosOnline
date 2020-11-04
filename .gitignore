@@ -159,9 +159,6 @@ dmypy.json
 
 # Pyre type checker
 
-# Flask-Scss settings
-css/
-
 # Sass setings
 .sass-cache
 

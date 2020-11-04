@@ -1,0 +1,48 @@
+{% extends 'template.html' %}
+{% block content %}
+<section class="cadastro">
+    <h1 class="cadastro__localizacao">Cadastro</h1>
+    <form class="cadastro__form" action="{{ url_for('nova_conta') }}" method="post">
+        <fieldset class="cadastro__conta espaco-embaixo-maior" id="cadastro_conta">
+            <legend class="cadastro__titulo espaco-embaixo">Conta</legend>
+            <label for="cadastro_email" class="label-titulo espaco-embaixo">Email</label>
+            <input type="email" id="cadastro_email" name="email" class="input espaco-embaixo" required>
+            <label for="cadastro_senha" class="label-titulo espaco-embaixo">Senha</label>
+            <input type="password" id="cadastro_senha" name="senha" class="input espaco-embaixo" required>
+            <label for="cadastro_confirma" class="label-titulo espaco-embaixo">Confirme a senha</label>
+            <input type="password" id="cadastro_confirma" name="confirmacao" class="input espaco-embaixo" required>
+            <p class="label-titulo espaco-embaixo">Como pretende usar o aplicativo?</p>
+            <div class="botao-area-lado espaco-embaixo-meio">
+                <label for="cadastro_cliente" class="radio-titulo active" id="conta-cliente">Procurar eventos</label>
+                <input type="radio" value="cliente" id="cadastro_cliente" name="tipo-conta" class="radio" checked>
+                <label for="cadastro_estabelecimento" class="radio-titulo" id="conta-estabelecimento">Publicar eventos</label>
+                <input type="radio" value="estabelecimento" id="cadastro_estabelecimento" name="tipo-conta" class="radio">
+            </div>
+        </fieldset>
+        <fieldset class="cadastro__cliente esconder espaco-embaixo-maior2" id="cadastro_dados">
+            <legend class="cadastro__titulo espaco-embaixo">Dados pessoais</legend>
+            <label for="cadastro_cliente_nome" class="label-titulo espaco-embaixo">Nome</label>
+            <input type="text" id="cadastro_cliente_nome" name="nome_cliente" class="input espaco-embaixo" >
+            <label for="cadastro_cliente_cidade" class="label-titulo espaco-embaixo">Cidade</label>
+            <input type="text" id="cadastro_cliente_cidade" name="cidade_cliente" class="input espaco-embaixo" >
+        </fieldset>
+        <fieldset class="cadastro__esta esconder espaco-embaixo-maior3" id="cadastro_esta">
+            <legend class="cadastro__titulo espaco-embaixo">Dados do Local</legend>
+            <label for="cadastro_esta_nome" class="label-titulo espaco-embaixo">Nome</label>
+            <input type="text" id="cadastro_esta_nome" name="nome_esta" class="input espaco-embaixo" >
+            <label for="cadastro_esta_cnpj" class="label-titulo espaco-embaixo">CNPJ</label>
+            <input type="text" id="cadastro_esta_cnpj" name="cnpj_esta" class="input espaco-embaixo" >
+            <label for="cadastro_esta_cidade" class="label-titulo espaco-embaixo">Cidade</label>
+            <input type="text" id="cadastro_esta_cidade" name="cidade_esta" class="input espaco-embaixo" >
+        </fieldset>
+        <div class="botao-area-lado esconder botao-embaixo" id="botao-cadastro">
+            <button class="botao botao-secundario botao-lado" id="botao-voltar">Voltar</button>
+            <input type="submit" value="Cadastrar" class="botao botao-lado">
+        </div>
+    </form>
+    <div class="botao-area-lado botao-embaixo" id="botao-cancelar">
+        <a href="{{ url_for('home') }}" class="botao-lado"><button class="botao botao-secundario">Cancelar</button></a>
+        <button class="botao botao-lado" id="prox_pagina">Próximo</button>
+    </div>
+</section>
+{% endblock %}

@@ -41,7 +41,7 @@ class Data:
 
 
 class Email:
-    def __init__(self, email):
+    def __init__(self, email: str):
         self.__email = None
 
         self.__inicializa_email(email)

@@ -1,6 +1,6 @@
 import pytest
 
-from src.servidor.regras_de_negocio.dados import Email
+from src.servidor.regras_de_negocio.informacao import Email
 from src.servidor.regras_de_negocio.excessoes import EmailInvalidoError
 
 

@@ -1,2 +1,4 @@
+from src.interface.controller import start
+
 if __name__ == '__main__':
-    pass
+    start()

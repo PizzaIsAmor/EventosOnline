@@ -1,0 +1,31 @@
+.login {
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: column;
+    height: 100vh;
+    justify-content: flex-end;
+    padding: 0 1em;
+    width: 100%;
+}
+
+.login__nome-marca {
+    margin-bottom: 2em;
+}
+
+.login__formulario--email, .login__formulario--senha {
+    margin-bottom: 4em;
+}
+
+.login__formulario--submit {
+    margin-bottom: 0.5em;
+}
+
+.login__cadastro {
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+.login__esqueceu-senha {
+    margin-bottom: 1em;
+}

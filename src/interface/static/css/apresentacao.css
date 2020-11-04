@@ -1,0 +1,28 @@
+@import url(_variaveis.css);
+
+.apresentacao {
+    align-items: center;
+    background: #FFFFFF url('../img/pre_login.png') center no-repeat;
+    background-size: cover;
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: column;
+    height: 100vh;
+    justify-content: flex-end;
+    padding: 0 1em;
+    width: 100%;
+}
+
+.apresentacao__nome-marca {
+    color: var(--cor-branco);
+    margin-bottom: 33.5vh;
+}
+
+.apresentacao__login {
+    margin-bottom: 1em;
+    width: 100%;
+}
+
+.apresentacao__cadastro {
+    margin-bottom: 1em;
+}
